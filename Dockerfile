@@ -27,7 +27,7 @@ RUN chmod +x /etc/service/postgresqld/run
 #maybe include additional software that need to be installed ... with some service running ... like example mysqld
 COPY dspace_tomcat8.conf /tmp/dspace_tomcat8.conf
 COPY pre-conf.sh /sbin/pre-conf
-RUN chmod +x /sbin/pre-conf \
+RUN chmod +x /sbin/pre-conf; sync \
     && /bin/bash -c /sbin/pre-conf \
     && rm /sbin/pre-conf
 
