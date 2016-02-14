@@ -19,11 +19,11 @@
   mkdir /build
         chmod -R 770 /build
         cd /build
-        wget https://github.com/DSpace/DSpace/releases/download/dspace-5.3/dspace-5.3-src-release.tar.gz
-        tar -zxf dspace-5.3-src-release.tar.gz
-        rm dspace-5.3-src-release.tar.gz
+        wget https://github.com/DSpace/DSpace/releases/download/dspace-5.4/dspace-5.4-src-release.tar.gz
+        tar -zxf dspace-5.4-src-release.tar.gz
+        rm dspace-5.4-src-release.tar.gz
     
-        cd /build/dspace-5.3-src-release
+        cd /build/dspace-5.4-src-release
         mvn package
       
         # fix problem relate to postgresql
@@ -32,7 +32,7 @@
         cp /etc/ssl/private/ssl-cert-snakeoil.key server.key
         chown postgres *
         chmod 640 server.crt server.key
-        cd /build/dspace-5.3-src-release
+        cd /build/dspace-5.4-src-release
         
     #conf database before build and installation of dspace
         POSTGRESQL_BIN=/usr/lib/postgresql/9.4/bin/postgres
@@ -59,7 +59,7 @@
         /sbin/setuser dspace createdb -U dspace -E UNICODE dspace 
         
         # build dspace and install
-        cd /build/dspace-5.3-src-release/dspace/target/dspace-installer
+        cd /build/dspace-5.4-src-release/dspace/target/dspace-installer
         ant fresh_install
         chown tomcat8:tomcat8 /dspace -R
         killall postgres
