@@ -1,6 +1,6 @@
 # docker-dspace
 
-Docker container for [DSpace 5.4][3]
+Docker container for [DSpace 5.5][3]
 
 "DSpace is the software of choice for academic, non-profit, and commercial organizations building open digital repositories."
 
@@ -52,7 +52,7 @@ For additional info about us and our projects check our site [www.quantumobject.
 
 [1]:http://www.dspace.org
 [2]:https://www.docker.com
-[3]:https://wiki.duraspace.org/display/DSPACE/DSpace+Release+5.4+Status
+[3]:https://wiki.duraspace.org/display/DSPACE/DSpace+Release+5.5+Status
 [4]:http://docs.docker.com
 [5]:https://github.com/QuantumObject/docker-dspace
 [6]:https://www.quantumobject.org
