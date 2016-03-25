@@ -42,21 +42,21 @@
         chown postgres /var/run/postgresql/9.4-main.pg_stat_tmp
         chgrp postgres /var/run/postgresql/9.4-main.pg_stat_tmp
         
-        /sbin/setuser postgres $POSTGRESQL_BIN --single \
+       chpst -u postgres $POSTGRESQL_BIN --single \
                 --config-file=$POSTGRESQL_CONFIG_FILE \
               <<< "UPDATE pg_database SET encoding = pg_char_to_encoding('UTF8') WHERE datname = 'template1'" &>/dev/null
 
-        /sbin/setuser postgres $POSTGRESQL_BIN --single \
+        chpst -u postgres $POSTGRESQL_BIN --single \
                 --config-file=$POSTGRESQL_CONFIG_FILE \
                   <<< "CREATE USER dspace WITH SUPERUSER;" &>/dev/null
-        /sbin/setuser postgres $POSTGRESQL_BIN --single \
+        chpst -u postgres $POSTGRESQL_BIN --single \
                 --config-file=$POSTGRESQL_CONFIG_FILE \
                 <<< "ALTER USER dspace WITH PASSWORD 'dspace';" &>/dev/null
                 
         echo "local all dspace md5" >> /etc/postgresql/9.4/main/pg_hba.conf
-        /sbin/setuser postgres /usr/lib/postgresql/9.4/bin/postgres -D  /var/lib/postgresql/9.4/main -c config_file=/etc/postgresql/9.4/main/postgresql.conf >>/var/log/postgresd.log 2>&1 &
+        chpst -u postgres /usr/lib/postgresql/9.4/bin/postgres -D  /var/lib/postgresql/9.4/main -c config_file=/etc/postgresql/9.4/main/postgresql.conf >>/var/log/postgresd.log 2>&1 &
         sleep 10s
-        /sbin/setuser dspace createdb -U dspace -E UNICODE dspace 
+        chpst -u dspace createdb -U dspace -E UNICODE dspace 
         
         # build dspace and install
         cd /build/dspace-5.5-src-release/dspace/target/dspace-installer
