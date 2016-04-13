@@ -4,7 +4,7 @@ FROM quantumobject/docker-tomcat8
 MAINTAINER Angel Rodriguez  "angel@quantumobject.com"
 
 #add repository and update the container
-#Installation of nesesary package/software for this containers...
+#Installation of necessary package/software for this containers...
 RUN echo "deb http://archive.ubuntu.com/ubuntu `cat /etc/container_environment/DISTRIB_CODENAME`-backports main restricted " >> /etc/apt/sources.list
 RUN apt-get update && apt-get install -y -q --force-yes python-software-properties \
                                             software-properties-common \
