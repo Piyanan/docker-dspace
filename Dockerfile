@@ -20,10 +20,8 @@ RUN apt-get update && apt-get install -y -q --force-yes python-software-properti
 ##Adding Deamons to containers
 # to add postgresqld deamon to runit
 RUN mkdir /etc/service/postgresqld /var/log/postgresqld ; sync
-RUN mkdir /etc/service/postgresqld/log
 COPY postgresqld.sh /etc/service/postgresqld/run
-COPY postgresqld-log.sh /etc/service/postgresqld/log/run
-RUN chmod +x /etc/service/postgresqld/run /etc/service/postgresqld/log/run \
+RUN chmod +x /etc/service/postgresqld/run \
     && cp /var/log/cron/config /var/log/postgresqld/ \
     && chown -R postgres /var/log/postgresqld
 
