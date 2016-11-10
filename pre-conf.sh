@@ -32,7 +32,7 @@
         cp /etc/ssl/private/ssl-cert-snakeoil.key server.key
         chown postgres *
         chmod 640 server.crt server.key
-        cd /build/dspace-5.5-src-release
+        cd /build/dspace-6.0-release
         
     #conf database before build and installation of dspace
         POSTGRESQL_BIN=/usr/lib/postgresql/9.4/bin/postgres
