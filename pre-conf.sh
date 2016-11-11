@@ -27,11 +27,14 @@
         mvn package
       
         # fix problem relate to postgresql
-        cd /var/lib/postgresql/9.4/main
-        cp /etc/ssl/certs/ssl-cert-snakeoil.pem server.crt
-        cp /etc/ssl/private/ssl-cert-snakeoil.key server.key
-        chown postgres *
-        chmod 640 server.crt server.key
+        # cd /var/lib/postgresql/9.4/main
+        # cp /etc/ssl/certs/ssl-cert-snakeoil.pem server.crt
+        # cp /etc/ssl/private/ssl-cert-snakeoil.key server.key
+        # chown postgres *
+        # chmod 640 server.crt server.key
+        
+        sed -i 's/ssl = true/ssl = false/' /etc/postgresql/9.4/main/postgresql.conf
+        
         cd /build/dspace-6.0-release
         
     #conf database before build and installation of dspace
@@ -54,7 +57,7 @@
                 <<< "ALTER USER dspace WITH PASSWORD 'dspace';" &>/dev/null
                 
         echo "local all dspace md5" >> /etc/postgresql/9.4/main/pg_hba.conf
-        chpst -u postgres /usr/lib/postgresql/9.4/bin/postgres -D  /var/lib/postgresql/9.4/main -c config_file=/etc/postgresql/9.4/main/postgresql.conf >>/var/log/postgresd.log 2>&1 &
+        chpst -u postgres /usr/lib/postgresql/9.4/bin/postgres -D  /var/lib/postgresql/9.4/main -c config_file=/etc/postgresql/9.4/main/postgresql.conf >>/var/log/postgresd.log 2>&1
         sleep 10s
         chpst -u dspace createdb -U dspace -E UNICODE dspace 
         
