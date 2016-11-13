@@ -57,7 +57,7 @@
                 <<< "ALTER USER dspace WITH PASSWORD 'dspace';" &>/dev/null
                 
         echo "local all dspace md5" >> /etc/postgresql/9.4/main/pg_hba.conf
-        chpst -u postgres /usr/lib/postgresql/9.4/bin/postgres -D  /var/lib/postgresql/9.4/main -c config_file=/etc/postgresql/9.4/main/postgresql.conf >>/var/log/postgresd.log 2>&1
+        chpst -u postgres /usr/lib/postgresql/9.4/bin/postgres -D  /var/lib/postgresql/9.4/main -c config_file=/etc/postgresql/9.4/main/postgresql.conf >>/var/log/postgresd.log 2>&1 &
         sleep 10s
         chpst -u dspace createdb -U dspace -E UNICODE dspace 
         
