@@ -10,6 +10,7 @@ RUN apt-get update && apt-get install -y -q --force-yes python-software-properti
                                             software-properties-common \
                                             postgresql \
                                             openjdk-7-jdk \
+                                            postgresql-contrib \
                                             ant \
                                             git \
                                             unzip \
