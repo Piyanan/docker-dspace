@@ -52,6 +52,9 @@
         sleep 10s
         chpst -u dspace createdb -U dspace -E UNICODE dspace 
         
+        chpst -u postgres $POSTGRESQL_BIN --single \
+                --config-file=$POSTGRESQL_CONFIG_FILE \
+                <<< "CREATE EXTENSION pgcrypto;" &>/dev/null
         
         # build dspace and install
         cd /build/dspace-6.0-release/dspace/target/dspace-installer
