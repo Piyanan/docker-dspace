@@ -19,20 +19,14 @@
   mkdir /build
         chmod -R 770 /build
         cd /build
-        wget https://github.com/DSpace/DSpace/releases/download/dspace-5.5/dspace-5.5-src-release.tar.gz
-        tar -zxf dspace-5.5-src-release.tar.gz
-        rm dspace-5.5-src-release.tar.gz
-    
-        cd /build/dspace-5.5-src-release
+        wget https://github.com/DSpace/DSpace/releases/download/dspace-6.0/dspace-6.0-release.tar.gz
+        tar -zxf dspace-6.0-release.tar.gz
+        rm dspace-6.0-release.tar.gz
+        
+        cd /build/dspace-6.0-release
         mvn package
-      
-        # fix problem relate to postgresql
-        cd /var/lib/postgresql/9.4/main
-        cp /etc/ssl/certs/ssl-cert-snakeoil.pem server.crt
-        cp /etc/ssl/private/ssl-cert-snakeoil.key server.key
-        chown postgres *
-        chmod 640 server.crt server.key
-        cd /build/dspace-5.5-src-release
+        
+        sed -i 's/ssl = true/ssl = false/' /etc/postgresql/9.4/main/postgresql.conf
         
     #conf database before build and installation of dspace
         POSTGRESQL_BIN=/usr/lib/postgresql/9.4/bin/postgres
@@ -58,8 +52,10 @@
         sleep 10s
         chpst -u dspace createdb -U dspace -E UNICODE dspace 
         
+        chpst -u postgres psql dspace <<< "CREATE EXTENSION pgcrypto;" &>/dev/null
+        
         # build dspace and install
-        cd /build/dspace-5.5-src-release/dspace/target/dspace-installer
+        cd /build/dspace-6.0-release/dspace/target/dspace-installer
         ant fresh_install
         chown tomcat8:tomcat8 /dspace -R
         killall postgres
