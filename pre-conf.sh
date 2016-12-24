@@ -62,6 +62,6 @@
         sleep 10s
 
   apt-get clean
-  rm -rf /build
+  # rm -rf /build   needed to chnage configuration after installing the container...
   rm -rf /tmp/* /var/tmp/*
   rm -rf /var/lib/apt/lists/*
